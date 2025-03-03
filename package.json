@@ -17,13 +17,13 @@
     "scripts": {
         "setup-npmrc": "node scripts/setup-npmrc.js",
         "v-bump": "yarn version --patch",
-        "dev": "dotenv -- next dev",
-        "build": "next build",
-        "start": "dotenv -- next start",
-        "test": "echo 'Unit testing is not configured for now, skipping..'",
+        "knip": "knip",
         "lint": "biome format --write . && biome lint . && next lint",
         "lint:fix": "next lint --fix && biome lint . --apply && biome format --write .",
-        "knip": "knip"
+        "test": "echo 'Unit testing is not configured for now, skipping..'",
+        "dev": "dotenv -- next dev",
+        "build": "next build",
+        "start": "dotenv -- next start"
     },
     "dependencies": {
         "@cybearl/cypack": "^2025.2.2",
