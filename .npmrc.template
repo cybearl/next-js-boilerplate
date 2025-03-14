@@ -1,4 +1,0 @@
-# The Cybearl private Github Package Registry.
-@cybearl:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=$NPMRC_CYBEARL_AUTH_TOKEN
-always-auth=true

@@ -10,11 +10,6 @@ declare global {
 			VERSION: string
 
 			/**
-			 * The .npmrc auth token used to authenticate with the private Cybearl GitHub Package Registry.
-			 */
-			NPMRC_CYBEARL_AUTH_TOKEN: string
-
-			/**
 			 * The port of the application, used by the server to listen to incoming requests.
 			 */
 			PORT: string

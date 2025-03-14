@@ -15,7 +15,6 @@
         "url": "https://github.com/cybearl/next-js-boilerplate/issues"
     },
     "scripts": {
-        "setup-npmrc": "node scripts/setup-npmrc.js",
         "v-bump": "yarn version --patch",
         "knip": "knip",
         "lint": "biome format --write . && biome lint . && next lint",
