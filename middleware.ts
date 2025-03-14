@@ -1,23 +1,6 @@
+import { fullyPermissiveCspHeader } from "@cybearl/cypack"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
-
-/**
- * A fully permissive Content Security Policy header used for development purposes.
- */
-const fullyPermissiveCspHeader = `
-    default-src * data: mediastream: blob: filesystem: about: ws: wss: 'unsafe-eval' 'wasm-unsafe-eval' 'unsafe-inline';
-    script-src * data: blob: 'unsafe-inline' 'unsafe-eval';
-    script-src-elem * data: blob: 'unsafe-inline';
-    connect-src * data: blob: 'unsafe-inline';
-    img-src * data: blob: 'unsafe-inline';
-    media-src * data: blob: 'unsafe-inline';
-    frame-src * data: blob: ;
-    style-src * data: blob: 'unsafe-inline';
-    font-src * data: blob: 'unsafe-inline';
-    frame-ancestors * data: blob:;
-`
-	.replace(/\s{2,}/g, " ")
-	.trim()
 
 /**
  * The Next.js middleware.
@@ -29,7 +12,8 @@ export function middleware(request: NextRequest) {
 	const nonce = crypto.randomUUID()
 
 	// All subdomains allowed for CSP
-	const wildcardDomain = `https://${process.env.NEXT_PUBLIC_DOMAIN.replace(/^https?:\/\//, "*.")}`
+	const domains = process.env.NEXT_PUBLIC_DOMAIN.split(",")
+	const wildcardDomains = domains.map(domain => `https://${domain.replace(/^https?:\/\//, "*.")}`).join(" ")
 
 	// Cybearl's domains allowed for tracking and analytics
 	const cybearlDomains = "https://*.cybearl.com https://cybearl.com"
@@ -46,7 +30,7 @@ export function middleware(request: NextRequest) {
 
 	const cspHeader = `
         default-src 'none';
-        connect-src 'self' ${wildcardDomain} ${cybearlDomains} ${iconifyDomains};
+        connect-src 'self' ${wildcardDomains} ${cybearlDomains} ${iconifyDomains};
         script-src 'strict-dynamic' 'nonce-${nonce}';
         style-src 'self' 'unsafe-inline' *.googleapis.com *.gstatic.com;
         font-src 'self' *.googleapis.com *.gstatic.com;
@@ -69,8 +53,10 @@ export function middleware(request: NextRequest) {
 
 	// Request headers
 	const requestHeaders = new Headers(request.headers)
-	requestHeaders.set("x-nonce", nonce)
+
+	// Set the request headers
 	requestHeaders.set("Content-Security-Policy", header)
+	requestHeaders.set("x-nonce", nonce)
 
 	// Response headers based on status
 	let response: NextResponse<unknown>
@@ -81,7 +67,11 @@ export function middleware(request: NextRequest) {
 		response = NextResponse.rewrite(new URL(request.nextUrl), { request: { headers: requestHeaders } })
 	}
 
+	// Set the response headers
 	response.headers.set("Content-Security-Policy", header)
+	response.headers.set("X-Content-Type-Options", "nosniff")
+	response.headers.set("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload")
+
 	return response
 }
 
