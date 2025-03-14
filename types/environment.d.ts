@@ -22,6 +22,9 @@ declare global {
 			/**
 			 * The domain of the application, used for the middleware in production, and other
 			 * domain-related operations.
+			 *
+			 * **Warning:** If linked to `$COOLIFY_URL`, it can be multiple domains separated by a comma
+			 * and should be parsed before usage.
 			 */
 			NEXT_PUBLIC_DOMAIN: string
 
