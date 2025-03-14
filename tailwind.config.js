@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
 import plugin from "tailwindcss/plugin"
 
 /** @type {import("tailwindcss").Config} */
@@ -8,7 +7,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				comfortaa: ["var(--font-comfortaa)"],
+				"roboto-mono": ["var(--font-roboto-mono)"],
 			},
 			borderRadius: {
 				lg: "var(--radius)",
@@ -19,7 +18,7 @@ module.exports = {
 		},
 	},
 	plugins: [
-		require("tailwindcss-animate"),
+		import("tailwindcss-animate"),
 
 		// Adding child variants
 		plugin(({ addVariant, matchVariant }) => {
@@ -70,6 +69,6 @@ module.exports = {
 			)
 		}),
 		// Adding text shadow support
-		require("tailwindcss-textshadow"),
+		import("tailwindcss-textshadow"),
 	],
 }
