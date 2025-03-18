@@ -29,7 +29,7 @@ export default function AppHead({ customTitle, customDescription, doNotIndex }: 
 			{/* Metadata */}
 			<meta name="application-name" content={defaultTitle} />
 			<meta name="description" content={description} />
-			<meta name="author" content="Cybearl" />
+			<meta name="author" content="Yoratoni" />
 
 			{/* Social Media */}
 			<meta property="og:type" content="website" />
@@ -39,8 +39,15 @@ export default function AppHead({ customTitle, customDescription, doNotIndex }: 
 			<meta property="og:site_name" content={defaultTitle} />
 			<meta property="og:locale" content="en" />
 
-			{/* Prevent indexing on search engines */}
-			{doNotIndex && <meta name="robots" content="noindex,nofollow" />}
+			{/* Security */}
+			<meta name="Referrer-Policy" content="strict-origin-when-cross-origin" />
+
+			{doNotIndex ? (
+				// Prevent indexing for specific pages
+				<meta name="robots" content="noindex,nofollow" />
+			) : (
+				<meta name="robots" content="index,follow" />
+			)}
 		</Head>
 	)
 }
