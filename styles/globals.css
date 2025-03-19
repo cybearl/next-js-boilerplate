@@ -22,7 +22,6 @@ body {
     min-height: -webkit-fill-available;
     margin: 0;
     background-color: black;
-    scrollbar-gutter: stable;
 }
 
 body {
