@@ -5,7 +5,8 @@ import { useEffect, useState } from "react"
  * An enum containing all available breakpoints with their corresponding pixel values.
  */
 export enum Breakpoint {
-	xs = 0,
+	none = 0,
+	xs = 400,
 	sm = 640,
 	md = 768,
 	lg = 1024,
@@ -15,8 +16,8 @@ export enum Breakpoint {
 	"4xl" = 2560,
 	"5xl" = 3840,
 	"6xl" = 5120,
-	"7xl" = 7680,
-	"8xl" = 10240,
+	"7xl" = 6400,
+	"8xl" = 7680,
 }
 
 /**
@@ -25,7 +26,8 @@ export enum Breakpoint {
  * @returns The breakpoint.
  */
 export function getBreakpoint(width: number): Breakpoint {
-	if (width < Breakpoint.sm) return Breakpoint.xs
+	if (width < Breakpoint.xs) return Breakpoint.none
+	if (width >= Breakpoint.xs && width < Breakpoint.sm) return Breakpoint.xs
 	if (width >= Breakpoint.sm && width < Breakpoint.md) return Breakpoint.sm
 	if (width >= Breakpoint.md && width < Breakpoint.lg) return Breakpoint.md
 	if (width >= Breakpoint.lg && width < Breakpoint.xl) return Breakpoint.lg
@@ -45,24 +47,15 @@ export function getBreakpoint(width: number): Breakpoint {
  * @returns The current breakpoint of the device.
  */
 export default function useBreakpoint() {
-	const [breakpoint, setBreakpoint] = useState(() =>
-		getBreakpoint(typeof window !== "undefined" ? window.innerWidth : 0),
-	)
+	const width = typeof window !== "undefined" ? window.innerWidth : 0
+	const [breakpoint, setBreakpoint] = useState(() => getBreakpoint(width))
 
 	useEffect(() => {
-		const calcInnerWidth = throttle(() => {
-			let innerWidth = 0
-
-			if (typeof window !== "undefined") {
-				innerWidth = window.innerWidth
-			}
-
-			setBreakpoint(getBreakpoint(innerWidth))
-		}, 200)
+		const calcInnerWidth = throttle(() => setBreakpoint(getBreakpoint(width)), 128)
 
 		window.addEventListener("resize", calcInnerWidth)
 		return () => window.removeEventListener("resize", calcInnerWidth)
-	}, [])
+	}, [width])
 
 	return breakpoint
 }
