@@ -2,22 +2,42 @@ import throttle from "lodash.throttle"
 import { useEffect, useState } from "react"
 
 /**
- * The type containing all available breakpoints.
+ * An enum containing all available breakpoints with their corresponding pixel values.
  */
-type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "> xl"
+export enum Breakpoint {
+	xs = 0,
+	sm = 640,
+	md = 768,
+	lg = 1024,
+	xl = 1280,
+	"2xl" = 1536,
+	"3xl" = 1920,
+	"4xl" = 2560,
+	"5xl" = 3840,
+	"6xl" = 5120,
+	"7xl" = 7680,
+	"8xl" = 10240,
+}
 
 /**
- * Get the current breakpoint based on the width of the device.
- * @param width The width of the device.
- * @returns The current breakpoint.
+ * Get the breakpoint based on the width.
+ * @param width The width to get the breakpoint for.
+ * @returns The breakpoint.
  */
-function getBreakpoint(width: number): Breakpoint {
-	if (width < 640) return "xs"
-	if (width >= 640 && width < 768) return "sm"
-	if (width >= 768 && width < 1024) return "md"
-	if (width >= 1024 && width < 1280) return "lg"
-	if (width >= 1280 && width < 1536) return "xl"
-	return "> xl"
+export function getBreakpoint(width: number): Breakpoint {
+	if (width < Breakpoint.sm) return Breakpoint.xs
+	if (width >= Breakpoint.sm && width < Breakpoint.md) return Breakpoint.sm
+	if (width >= Breakpoint.md && width < Breakpoint.lg) return Breakpoint.md
+	if (width >= Breakpoint.lg && width < Breakpoint.xl) return Breakpoint.lg
+	if (width >= Breakpoint.xl && width < Breakpoint["2xl"]) return Breakpoint.xl
+	if (width >= Breakpoint["2xl"] && width < Breakpoint["3xl"]) return Breakpoint["2xl"]
+	if (width >= Breakpoint["3xl"] && width < Breakpoint["4xl"]) return Breakpoint["3xl"]
+	if (width >= Breakpoint["4xl"] && width < Breakpoint["5xl"]) return Breakpoint["4xl"]
+	if (width >= Breakpoint["5xl"] && width < Breakpoint["6xl"]) return Breakpoint["5xl"]
+	if (width >= Breakpoint["6xl"] && width < Breakpoint["7xl"]) return Breakpoint["6xl"]
+	if (width >= Breakpoint["7xl"] && width < Breakpoint["8xl"]) return Breakpoint["7xl"]
+
+	return Breakpoint["8xl"]
 }
 
 /**
