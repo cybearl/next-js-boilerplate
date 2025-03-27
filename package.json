@@ -1,6 +1,6 @@
 {
     "name": "next-js-boilerplate",
-    "version": "2025.3.1",
+    "version": "2025.3.2",
     "description": "An advanced and entirely pre-configured Next.js & BiomeJS boilerplate.",
     "author": "Cybearl <contact@cybearl.com> (https://www.cybearl.com/)",
     "license": "MIT",
@@ -28,6 +28,7 @@
         "@cybearl/cypack": "^1.2.3",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
+        "lodash.throttle": "^4.1.1",
         "next": "^14.2.24",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
@@ -41,6 +42,7 @@
     "devDependencies": {
         "@biomejs/biome": "^1.9.4",
         "@iconify/react": "^5.2.0",
+        "@types/lodash.throttle": "^4.1.9",
         "@types/node": "^22.13.1",
         "@types/react": "^18.3.18",
         "@types/react-dom": "^18.3.5",
