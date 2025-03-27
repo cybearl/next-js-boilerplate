@@ -7,11 +7,11 @@ import { useEffect, useState } from "react"
 type Breakpoint = "xs" | "sm" | "md" | "lg" | "xl" | "> xl"
 
 /**
- * Get the device configuration based on the width.
+ * Get the current breakpoint based on the width of the device.
  * @param width The width of the device.
- * @returns The device configuration.
+ * @returns The current breakpoint.
  */
-function getDeviceConfig(width: number): Breakpoint {
+function getBreakpoint(width: number): Breakpoint {
 	if (width < 640) return "xs"
 	if (width >= 640 && width < 768) return "sm"
 	if (width >= 768 && width < 1024) return "md"
@@ -21,17 +21,13 @@ function getDeviceConfig(width: number): Breakpoint {
 }
 
 /**
- * Custom hook for getting the current breakpoint of the device.
+ * Custom hook for getting the current breakpoint of a device based on its width.
  * @returns The current breakpoint of the device.
  */
 export default function useBreakpoint() {
-	let innerWidth = 0
-
-	if (typeof window !== "undefined") {
-		innerWidth = window.innerWidth
-	}
-
-	const [brkPnt, setBrkPnt] = useState(() => getDeviceConfig(innerWidth))
+	const [breakpoint, setBreakpoint] = useState(() =>
+		getBreakpoint(typeof window !== "undefined" ? window.innerWidth : 0),
+	)
 
 	useEffect(() => {
 		const calcInnerWidth = throttle(() => {
@@ -41,12 +37,12 @@ export default function useBreakpoint() {
 				innerWidth = window.innerWidth
 			}
 
-			setBrkPnt(getDeviceConfig(innerWidth))
+			setBreakpoint(getBreakpoint(innerWidth))
 		}, 200)
 
 		window.addEventListener("resize", calcInnerWidth)
 		return () => window.removeEventListener("resize", calcInnerWidth)
 	}, [])
 
-	return brkPnt
+	return breakpoint
 }
