@@ -36,7 +36,7 @@ export default function Layout({
 					</main>
 				) : (
 					<>
-						<main className={cn("flex-grow w-full gap-16", enableMaxWidth ? "max-w-6xl" : "")}>
+						<main className={cn("flex-grow w-full h-full gap-16 flex", enableMaxWidth ? "max-w-6xl" : "")}>
 							{children}
 						</main>
 						<Footer />
