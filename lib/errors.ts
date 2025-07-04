@@ -1,3 +1,4 @@
+import type { ErrorObj } from "@cybearl/cypack"
 import { BaseErrors } from "@cybearl/cypack/backend"
 
 /**
@@ -5,4 +6,4 @@ import { BaseErrors } from "@cybearl/cypack/backend"
  */
 export const AppErrors = {
 	...BaseErrors,
-}
+} as const satisfies Record<string, ErrorObj>
