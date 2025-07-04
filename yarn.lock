@@ -69,10 +69,10 @@
   resolved "https://registry.yarnpkg.com/@biomejs/cli-win32-x64/-/cli-win32-x64-1.9.4.tgz#4c7afa90e3970213599b4095e62f87e5972b2340"
   integrity sha512-8Y5wMhVIPaWe6jw2H+KlEm4wP/f7EW3810ZLmDlrEEy5KvBsb9ECEfu/kMWD484ijfQ8+nIi0giMgu9g1UAuuA==
 
-"@cybearl/cypack@^1.8.8":
-  version "1.8.8"
-  resolved "https://registry.yarnpkg.com/@cybearl/cypack/-/cypack-1.8.8.tgz#6154484b2ca35021f23739d69405713b10d89ed5"
-  integrity sha512-/30iMVQVozlKGTADMEdGczq/fyVJE09mE245YDJsImNVamFrxUyA28cFEloj58TGKz3KDuDEv8KlGn4yiF+jlQ==
+"@cybearl/cypack@^1.8.9":
+  version "1.8.9"
+  resolved "https://registry.yarnpkg.com/@cybearl/cypack/-/cypack-1.8.9.tgz#234c15aa36515e8754780c18baa368d6e84049a6"
+  integrity sha512-i9pe7FW2w2Q4lvYIgXK+fIDVMDvMSLRLYI7Z23v57xl2AvtdBrDVtK7dcqMjQqxZfEX6i1/5DMFUCEo345FuLA==
   dependencies:
     colorette "^2.0.20"
     dateformat "^5.0.3"

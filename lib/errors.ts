@@ -1,5 +1,5 @@
 import type { ErrorObj } from "@cybearl/cypack"
-import { BaseErrors } from "@cybearl/cypack/backend"
+import { BaseErrors } from "@cybearl/cypack"
 
 /**
  * Contains all the available errors for the application.

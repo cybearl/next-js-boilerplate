@@ -25,7 +25,7 @@
         "start": "dotenv -- next start"
     },
     "dependencies": {
-        "@cybearl/cypack": "^1.8.8",
+        "@cybearl/cypack": "^1.8.9",
         "@tailwindcss/postcss": "^4.1.10",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
